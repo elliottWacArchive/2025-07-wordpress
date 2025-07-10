@@ -18,3 +18,13 @@ function my_stats_menu() {
     6                   // Position
   );
 }
+
+//Content admin page
+function my_stats_page() {
+  echo '<div class="wrap">';
+  echo '<h1>Tableau de bord - Statistiques Quiz</h1>';
+  echo '<canvas id="myChart" width="600" height="400"></canvas>';
+  echo '</div>';
+}
+
+  ?>
