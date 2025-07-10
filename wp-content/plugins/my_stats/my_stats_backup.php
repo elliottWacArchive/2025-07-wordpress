@@ -7,24 +7,29 @@ Version: 1.0
 Author: Loucman Machababy
 */
 
+// Crée un menu admin
+add_action('admin_menu', 'my_stats_menu');
+
 function my_stats_menu() {
   add_menu_page(
-    'My Stats',         // Title
-    'My Stats',         // Menu name
-    'manage_options',   // Required capability
-    'my_stats',         // Page slug
-    'my_stats_page',    // Callback function
-    'dashicons-chart-bar', // Icon
+    'My Stats',         // Titre de la page
+    'My Stats',         // Nom du menu
+    'manage_options',   // Capability requise
+    'my_stats',         // Slug de la page
+    'my_stats_page',    // Fonction callback
+    'dashicons-chart-bar', // Icône
     6                   // Position
   );
 }
 
-//Content admin page
+// Contenu de la page admin
 function my_stats_page() {
   echo '<div class="wrap">';
   echo '<h1>Tableau de bord - Statistiques Quiz</h1>';
   echo '<canvas id="myChart" width="600" height="400"></canvas>';
   echo '</div>';
-}
 
   ?>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
