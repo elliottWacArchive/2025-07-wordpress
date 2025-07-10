@@ -32,4 +32,26 @@ function my_stats_page() {
   ?>
  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
+  <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['24h', '7 jours', '30 jours', '12 mois'],
+        datasets: [{
+          label: '# Quiz Passés',
+          data: [0, 0, 0, 0], 
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+  <?php
+}
