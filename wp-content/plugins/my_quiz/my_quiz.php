@@ -75,7 +75,7 @@ function my_quiz_handle_form() {
                 )
             );
 
-            wp_redirect(site_url('/passer-quiz')); 
+            wp_redirect(site_url('/passer-un-quiz')); 
             exit;
         }
 
