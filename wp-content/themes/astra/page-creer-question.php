@@ -2,9 +2,9 @@
 /* Template Name: Créer une question */
 get_header();
 ?>
-
+ 
 <h1>Créer une question</h1>
-
+ 
 <form method="POST">
     <?php wp_nonce_field('my_quiz_create_question_nonce'); ?>
     <label>Question :
@@ -21,6 +21,5 @@ get_header();
     <br>
     <button type="submit" name="my_quiz_create_question">Envoyer</button>
 </form>
-
+ 
 <?php get_footer(); ?>
-
