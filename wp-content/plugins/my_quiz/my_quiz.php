@@ -79,5 +79,31 @@ function my_quiz_handle_form() {
             exit;
         }
 
+        // Gestion de la soumission d'un quiz (exemple)
+        if (isset($_POST['my_quiz_submit_answers'])) {
+            if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'my_quiz_submit_answers_nonce')) {
+                wp_die('Erreur de sécurité.');
+            }
+
+            $quiz_id = isset($_POST['quiz_id']) ? intval($_POST['quiz_id']) : null;
+            $user_id = get_current_user_id();
+            $score = isset($_POST['quiz_score']) ? intval($_POST['quiz_score']) : null;
+
+            // Appel de la fonction de log du plugin my_stats (si elle existe)
+            if (function_exists('my_stats_log_quiz')) {
+                my_stats_log_quiz($user_id, $quiz_id);
+                // Tu peux modifier la fonction pour enregistrer aussi le score si besoin
+            }
+
+            // Maintenant on détruit la session
+            if (session_status() === PHP_SESSION_ACTIVE) {
+                session_destroy();
+            }
+
+            // Rediriger vers une page de remerciement ou de résultats
+            wp_redirect(site_url('/merci-quiz'));
+            exit;
+        }
+
     }
 }
