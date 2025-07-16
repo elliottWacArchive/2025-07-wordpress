@@ -7,30 +7,29 @@ Version: 1.0
 Author: Loucman Machababy
 */
 
-// Crée un menu admin
+//Create admin menu
 add_action('admin_menu', 'my_stats_menu');
 
 function my_stats_menu() {
   add_menu_page(
-    'My Stats',         // Titre de la page
-    'My Stats',         // Nom du menu
-    'manage_options',   // Capability requise
-    'my_stats',         // Slug de la page
-    'my_stats_page',    // Fonction callback
-    'dashicons-chart-bar', // Icône
-    6                   // Position
+    'My Stats',         
+    'My Stats',         
+    'manage_options',   
+    'my_stats',         
+    'my_stats_page',    
+    'dashicons-chart-bar',
+    6                   
   );
 }
 
-// Contenu de la page admin
+//Content page admin
 function my_stats_page() {
   echo '<div class="wrap">';
   echo '<h1>Tableau de bord - Statistiques Quiz</h1>';
   echo '<canvas id="myChart" width="600" height="400"></canvas>';
   echo '</div>';
-
   ?>
- 
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     const ctx = document.getElementById('myChart').getContext('2d');
@@ -40,7 +39,7 @@ function my_stats_page() {
         labels: ['24h', '7 jours', '30 jours', '12 mois'],
         datasets: [{
           label: '# Quiz Passés',
-          data: [0, 0, 0, 0], 
+          data: [0, 0, 0, 0],
           backgroundColor: 'rgba(54, 162, 235, 0.5)',
           borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1
@@ -54,4 +53,26 @@ function my_stats_page() {
     });
   </script>
   <?php
+}
+
+register_activation_hook(__FILE__, 'my_stats_install');
+
+function my_stats_install() {
+  global $wpdb;
+
+  $table_name = $wpdb->prefix . 'my_stats_logs';
+  $charset_collate = $wpdb->get_charset_collate();
+
+  $sql = "CREATE TABLE $table_name (
+    id mediumint(9) NOT NULL AUTO_INCREMENT,
+    user_id bigint(20) DEFAULT NULL,
+    quiz_id bigint(20) DEFAULT NULL,
+    ip_address varchar(100) DEFAULT NULL,
+    user_agent text DEFAULT NULL,
+    created_at datetime DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY  (id)
+  ) $charset_collate;";
+
+  require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+  dbDelta($sql);
 }
