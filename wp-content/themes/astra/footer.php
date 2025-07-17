@@ -27,6 +27,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	astra_footer_after();
 ?>
+	<footer>
+    	<div class="footer-group-members-neon">
+        	<p>Projet réalisé par : <strong>Eliott</strong>, <strong>Safiya</strong>, <strong>Loucman</strong></p>
+   		</div>
+	</footer>
 	</div><!-- #page -->
 <?php
 	astra_body_bottom();
