@@ -205,9 +205,12 @@ require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-filters.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-hooks.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-functions.php';
 
-function quiz_style() {
-    if (is_page_template('page-passer-quiz.php') || is_page_template('page-creer-question.php')) {
-        wp_enqueue_style('quiz-css', get_template_directory_uri() . '/css/quiz.css');
-    }
+function my_quiz_enqueue_styles() {
+    wp_enqueue_style(
+        'quiz-css',
+        get_stylesheet_directory_uri() . '/css/quiz.css',
+        array(),
+        filemtime(get_stylesheet_directory() . '/css/quiz.css')
+    );
 }
-add_action('wp_enqueue_scripts', 'quiz_style');
+add_action('wp_enqueue_scripts', 'my_quiz_enqueue_styles');
