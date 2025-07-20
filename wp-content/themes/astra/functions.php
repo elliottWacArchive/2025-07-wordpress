@@ -215,3 +215,17 @@ function quiz_style() {
 }
 add_action('wp_enqueue_scripts', 'quiz_style');
 
+add_filter( 'wp_nav_menu_objects', 'filtrer_menu_selon_utilisateur', 10, 2 );
+
+function filtrer_menu_selon_utilisateur( $items, $args ) {
+    foreach ( $items as $key => $item ) {
+        // masquer page admin si l'utilisateur n'est pas admin
+        if ( !current_user_can('administrator') && strpos( strtolower($item->title), 'admin' ) !== false ) {
+            unset( $items[$key] );
+        }
+    }
+
+    return $items;
+}
+
+

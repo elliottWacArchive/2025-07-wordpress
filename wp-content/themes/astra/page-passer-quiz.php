@@ -1,5 +1,11 @@
 <?php
 /* Template Name: Passer un quiz */
+
+if ( ! is_user_logged_in() ) {
+    wp_redirect( wp_login_url('/page-connexion') ); 
+    exit;
+}
+
 session_start();
 get_header();
 

@@ -3,11 +3,8 @@
 Template Name: Connexion
 */
 
-get_header();
-
 if (is_user_logged_in()) {
-    echo '<p>Vous êtes déjà connecté.</p>';
-    get_footer();
+    wp_redirect(site_url('/passer-un-quiz'));
     exit;
 }
 
@@ -31,12 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['my_login_nonce']) && 
             $errors[] = 'Identifiants incorrects.';
         } else {
             $success = true;
-            wp_redirect(home_url());
+            wp_redirect(site_url('/passer-un-quiz'));
             exit;
         }
     }
 }
+
+get_header();
 ?>
+
 <div class="connexion-form" style="max-width:400px;margin:2em auto;">
     <h1>Connexion</h1>
     <?php if ($errors) {
@@ -53,6 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['my_login_nonce']) && 
         <?php wp_nonce_field('my_login_action', 'my_login_nonce'); ?>
         <button type="submit">Se connecter</button>
     </form>
+    <p style="margin-top:1em;">
+        Pas encore inscrit ? <a href="<?php echo site_url('/inscription'); ?>">Créer un compte</a>
+    </p>
     <?php } ?>
 </div>
-<?php get_footer(); ?> 
+
+<?php get_footer(); ?>

@@ -1,5 +1,10 @@
 <?php
 /* Template Name: Créer une question */
+
+if ( ! is_user_logged_in() ) {
+    wp_redirect( wp_login_url('/page-connexion') );
+    exit;
+}
 get_header();
 ?>
 

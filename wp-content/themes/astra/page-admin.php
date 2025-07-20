@@ -3,9 +3,9 @@
  * Template Name: Page Admin Quiz
  */
 
-// if ( ! current_user_can('administrator') ) {
-//     wp_die('Accès réservé aux administrateurs.');
-// }
+if ( ! current_user_can('administrator') ) {
+    wp_die('Accès réservé aux administrateurs.');
+}
 
 get_header();
 
