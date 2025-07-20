@@ -2223,8 +2223,13 @@ if ( ! function_exists( 'astra_parse_selector' ) ) {
 		}
 
 		foreach ( $selector_array as $selector ) {
+<<<<<<< HEAD
 			$selector        = trim( $selector );
 			$ignore_selector = false;
+=======
+			$selector         = trim( $selector );
+			$ignore_selector  = false;
+>>>>>>> origin/dev
 
 			foreach ( $keywords as $keyword ) {
 				switch ( $keyword ) {

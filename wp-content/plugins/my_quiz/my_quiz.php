@@ -56,11 +56,9 @@ function my_quiz_handle_form() {
             $table_name = $wpdb->prefix . 'my_quiz_questions';
 
             $question = sanitize_text_field($_POST['question']);
-
             $answers = explode(',', $_POST['answers']);
             $answers = array_map('trim', $answers);
             $answers = maybe_serialize($answers);
- 
             $correct = sanitize_text_field($_POST['correct_answer']);
 
             $wpdb->insert(
@@ -72,11 +70,33 @@ function my_quiz_handle_form() {
                 )
             );
 
-            wp_redirect(site_url('/passer-un-quiz')); 
+            wp_redirect(site_url('/passer-un-quiz'));
             exit;
         }
 
-    } 
+        // Gestion de la soumission d'un quiz
+        if (isset($_POST['my_quiz_submit_answers'])) {
+            if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'my_quiz_submit_answers_nonce')) {
+                wp_die('Erreur de sécurité.');
+            }
+
+            $quiz_id = isset($_POST['quiz_id']) ? intval($_POST['quiz_id']) : null;
+            $user_id = get_current_user_id();
+            $score = isset($_POST['quiz_score']) ? intval($_POST['quiz_score']) : null;
+
+            // Enregistre via my_stats si dispo
+            if (function_exists('my_stats_log_quiz')) {
+                my_stats_log_quiz($user_id, $quiz_id);
+            }
+
+            if (session_status() === PHP_SESSION_ACTIVE) {
+                session_destroy();
+            }
+
+            wp_redirect(site_url('/merci-quiz'));
+            exit;
+        }
+    }
 }
 
 class QuizChoiceWidget extends WP_Widget {
@@ -117,7 +137,6 @@ class QuizChoiceWidget extends WP_Widget {
     }
 }
 
-// enregistrer le widget
 function register_quiz_choice_widget() {
     register_widget('QuizChoiceWidget');
 }

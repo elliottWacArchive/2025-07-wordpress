@@ -16,6 +16,7 @@ h1 {
   text-shadow: 0 0 5px #39c5bb;
 }
 
+/* Styles for general pages */
 .page-wrapper {
   display: flex;
   gap: 30px;
@@ -37,6 +38,8 @@ form {
   border: 2px solid #39c5bb;
   border-radius: 15px;
   padding: 30px;
+  max-width: 600px;
+  margin: 30px auto;
   box-shadow: 0 0 20px #39c5bb;
 }
 
@@ -85,6 +88,7 @@ p {
   color: #ffffff;
 }
 
+/* Sidebar widget styling */
 .widget_quiz_choice_widget form {
   display: flex;
   flex-direction: column;
@@ -117,6 +121,7 @@ p {
   background-color: #2aa39b;
 }
 
+/* Footer */
 .footer-group-members {
   font-size: 14px;
   color: #333;
@@ -136,6 +141,7 @@ p {
   text-shadow: 0 0 8px #0ff;
 }
 
+/* Admin page styles */
 .admin-quiz-container {
   max-width: 900px;
   margin: 40px auto;
