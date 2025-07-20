@@ -20,9 +20,5 @@ define( 'NPS_SURVEY_FILE', __FILE__ );
 define( 'NPS_SURVEY_BASE', plugin_basename( NPS_SURVEY_FILE ) );
 define( 'NPS_SURVEY_DIR', plugin_dir_path( NPS_SURVEY_FILE ) );
 define( 'NPS_SURVEY_URL', plugins_url( '/', NPS_SURVEY_FILE ) );
-<<<<<<< HEAD
 define( 'NPS_SURVEY_VER', '1.0.12' );
-=======
-define( 'NPS_SURVEY_VER', '1.0.11' );
->>>>>>> origin/dev
 require_once 'nps-survey-plugin-loader.php';
