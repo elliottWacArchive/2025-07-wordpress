@@ -26,14 +26,17 @@ function Miku_widgets_init() {
 
 function miku_create_pages() {
     $pages = array(
-        'creer-question' => array(
-            'title' => 'Créer une Question',
-            'content' => '[miku_question_form]'
-        ),
-        'quiz' => array(
-            'title' => 'Quiz',
-            'content' => '[miku_quiz_list]'
-        ),
+        // Supprimées car déjà créées manuellement :
+        // 'creer-question' => array(
+        //     'title' => 'Créer une Question',
+        //     'content' => '[miku_question_form]'
+        // ),
+        // 'quiz' => array(
+        //     'title' => 'Quiz',
+        //     'content' => '[miku_quiz_list]'
+        // ),
+
+        // On garde seulement les pages utiles non encore créées :
         'admin-articles' => array(
             'title' => 'Articles Administration',
             'content' => '[miku_admin_articles]'
@@ -450,3 +453,26 @@ add_shortcode('miku_question_form', 'miku_question_form_shortcode');
 add_shortcode('miku_quiz_list', 'miku_quiz_list_shortcode');
 add_shortcode('miku_admin_articles', 'miku_admin_articles_shortcode');
 add_shortcode('miku_display_question', 'miku_display_question_shortcode');
+
+function quiz_style() {
+    wp_enqueue_style(
+        'quiz-css',
+        get_template_directory_uri() . '/css/quiz.css',
+        array(),
+        filemtime(get_template_directory() . '/css/quiz.css')
+    );
+}
+add_action('wp_enqueue_scripts', 'quiz_style');
+
+add_filter( 'wp_nav_menu_objects', 'filtrer_menu_selon_utilisateur', 10, 2 );
+
+function filtrer_menu_selon_utilisateur( $items, $args ) {
+    foreach ( $items as $key => $item ) {
+        // masquer page admin si l'utilisateur n'est pas admin
+        if ( !current_user_can('administrator') && strpos( strtolower($item->title), 'admin' ) !== false ) {
+            unset( $items[$key] );
+        }
+    }
+
+    return $items;
+}

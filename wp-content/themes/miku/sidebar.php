@@ -16,14 +16,14 @@
                 <h4 class="widget-title">Actions utilisateur</h4>
                 <div class="widget-content">
                     <ul class="sidebar-menu user-menu">
-                        <li><a href="<?php echo home_url('/creer-question'); ?>" class="create-question">
+                        <li><a href="<?php echo home_url('/creer-une-question'); ?>" class="create-question">
                                 <span class="menu-icon">❓</span>Créer une question
                             </a></li>
-                        <li><a href="<?php echo home_url('/quiz'); ?>" class="take-quiz">
+                        <li><a href="<?php echo home_url('/passer-un-quiz'); ?>" class="take-quiz">
                                 <span class="menu-icon">🎓</span>Passer un quiz
                             </a></li>
                         <?php if (current_user_can('administrator')) : ?>
-                        <li><a href="<?php echo home_url('/admin-articles'); ?>" class="admin-articles">
+                        <li><a href="<?php echo home_url('/page-admin'); ?>" class="admin-articles">
                                 <span class="menu-icon">⚙️</span>Articles Admin
                             </a></li>
                         <?php endif; ?>
